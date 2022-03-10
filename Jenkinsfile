@@ -42,7 +42,7 @@ sshagent(['tomcat']) {
     stage('DAST') {
       steps {
         sshagent(['zap']) {
-            sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.89.125 "docker run -t owasp/zap2docker-stable zap-baseline.py -t http://54.174.9.237:8080/WebApp/" '
+            sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.89.125 "docker run -t owasp/zap2docker-stable zap-baseline.py -t http://54.174.9.237:8080/WebApp/" || true'
         } 
       }
     }
