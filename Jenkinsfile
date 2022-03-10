@@ -20,7 +20,7 @@ pipeline {
     stage('Deploy to tomcat') {
       steps {
           sshagent(['tomcat']) {
-            sh 'scp ssh -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/webapp-ci-cd-pipeline/target/*.war ubuntu@172.31.92.92:/root/prod/tomcat-10.0.17/webapps/webapp.war'
+            sh 'scp ssh -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/webapp-ci-cd-pipeline/target/*.war ubuntu@172.31.89.218:/opt/tomcat10/webapps/webapp.war'
 } 
       }
     }
