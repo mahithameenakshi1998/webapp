@@ -19,7 +19,7 @@ pipeline {
         sh 'cat trufflehog'
       }
     }
-    stage('SAST') {
+    stage('Code_quality_check') {
       steps {
         withSonarQubeEnv('sonar') {
                 sh 'mvn sonar:sonar'
@@ -42,7 +42,7 @@ sshagent(['tomcat']) {
     stage('DAST') {
       steps {
         sshagent(['zap']) {
-            sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.89.125 "docker run -t owasp/zap2docker-stable zap-baseline.py -t http://3.84.124.85:8080/WebApp/" || true'
+            sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.89.125 "docker run -t owasp/zap2docker-stable zap-baseline.py -t http://54.166.69.15:8080/WebApp/" || true'
         } 
       }
     }
