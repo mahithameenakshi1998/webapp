@@ -34,9 +34,7 @@ pipeline {
     }
     stage('Deploy to tomcat') {
       steps {
-sshagent(['tomcat']) {
-    sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/webapp-ci-cd-pipeline/target/*.war ubuntu@172.31.89.218:/opt/tomcat10/webapps/WebApp.war'
-       }
+          ansiblePlaybook credentialsId: 'ansible', disableHostKeyChecking: true, installation: 'ansible', inventory: 'ansi.dev', playbook: 'deploy.yml'
      }
    }
     stage('DAST') {
