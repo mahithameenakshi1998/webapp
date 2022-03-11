@@ -1,0 +1,2 @@
+[tomcatserver]
+172.31.89.218 ansible_user=ubuntu
