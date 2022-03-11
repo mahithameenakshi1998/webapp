@@ -1,5 +1,5 @@
 ---
-- hosts: tomcatserver  
+- hosts: tomcat  
   become: True
   tasks:
     - name: Deploy to tomcat
