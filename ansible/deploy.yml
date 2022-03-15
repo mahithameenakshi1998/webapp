@@ -1,8 +1,8 @@
 ---
 - name: deploy war
-  hosts: tomcat  
+  hosts: tomcat
   tasks:
     - name: copy the war file
       copy:
-        src: /var/lib/jenkins/workspace/webapp-ci-cd-pipeline/target/WebApp.war 
+        src: /var/lib/jenkins/workspace/webapp-ci-cd-pipeline/target/WebApp.war
         dest: /opt/tomcat10/webapps/

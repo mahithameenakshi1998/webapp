@@ -34,13 +34,13 @@ pipeline {
     }
     stage('Deploy to tomcat') {
       steps {
-          ansiblePlaybook credentialsId: 'ansible', disableHostKeyChecking: true, installation: 'ansible', inventory: 'ansi.dev', playbook: 'deploy.yml'
+          ansiblePlaybook credentialsId: 'ansible_id', disableHostKeyChecking: true, installation: 'ansible', inventory: 'ansi.dev', playbook: 'deploy.yml'
      }
    }
     stage('DAST') {
       steps {
         sshagent(['zap']) {
-            sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.89.125 "docker run -t owasp/zap2docker-stable zap-baseline.py -t http://54.166.69.15:8080/WebApp/" || true'
+            sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.89.125 "docker run -t owasp/zap2docker-stable zap-baseline.py -t http://34.201.33.126:8080/WebApp/" || true'
         } 
       }
     }
