@@ -2,8 +2,7 @@
 - hosts: tomcat  
   become: True
   tasks:
-    - name: Deploy to tomcat
+    - name: Deploy a war file
       copy:
         src: /var/lib/jenkins/workspace/webapp-ci-cd-pipeline/target/*.war 
-        dest: /opt/tomcat10/webapps/WebApp.war
-...
+        dest: ubuntu@172.31.89.218:/opt/tomcat10/webapps/WebApp.war
