@@ -5,5 +5,5 @@
     - name: Deploy to tomcat
       copy:
         src: /var/lib/jenkins/workspace/webapp-ci-cd-pipeline/target/*.war 
-        dest: ubuntu@172.31.89.218:/opt/tomcat10/webapps/WebApp.war
+        dest: /opt/tomcat10/webapps/WebApp.war
 ...
