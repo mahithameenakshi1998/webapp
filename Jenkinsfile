@@ -34,7 +34,7 @@ pipeline {
     }
     stage('Deploy to tomcat') {
       steps {
-          ansiblePlaybook credentialsId: 'ansible_id', disableHostKeyChecking: true, installation: 'ansible', inventory: 'ansi.dev', playbook: 'deploy.yml'
+          ansiblePlaybook credentialsId: 'ansible_id', disableHostKeyChecking: true, installation: 'ansible', inventory: '/home/ubuntu/webapp/ansible/ansi.dev', playbook: '/home/ubuntu/webapp/ansible/deploy.yml'
      }
    }
     stage('DAST') {
