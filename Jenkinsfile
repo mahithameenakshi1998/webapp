@@ -34,7 +34,7 @@ pipeline {
     }
     stage('Nexus storage') {
       steps {
-        sh 'nexusArtifactUploader artifacts: [[artifactId: 'WebApp', classifier: 'debug', file: '/var/lib/jenkins/workspace/webapp-ci-cd-pipeline/target/WebApp.war', type: 'war']], credentialsId: 'nexus', groupId: 'lu.amazon.aws.demo', nexusUrl: '3.236.186.83:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-snapshots', version: '1.0-SNAPSHOT'' 
+        sh 'nexusArtifactUploader artifacts: [[artifactId: 'WebApp', classifier: 'debug', file: '/var/lib/jenkins/workspace/webapp-ci-cd-pipeline/target/WebApp.war', type: 'war']], credentialsId: 'nexus', groupId: 'lu.amazon.aws.demo', nexusUrl: 'http://3.236.186.83:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-snapshots', version: '1.0-SNAPSHOT'' 
       }
     }
     stage('Deploy to tomcat') {
