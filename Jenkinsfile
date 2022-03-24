@@ -34,7 +34,7 @@ pipeline {
     }
     stage('Nexus storage') {
       steps {
-        nexusArtifactUploader artifacts: [[artifactId: 'WebApp', classifier: 'debug', file: '/var/lib/jenkins/workspace/webapp-ci-cd-pipeline/target/WebApp.war', type: 'war']], credentialsId: 'nexus', groupId: 'lu.amazon.aws.demo', nexusUrl: '3.236.186.83:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-snapshots', version: '2.0-SNAPSHOT' 
+        nexusArtifactUploader artifacts: [[artifactId: 'WebApp', classifier: 'debug', file: '/var/lib/jenkins/workspace/webapp-ci-cd-pipeline/target/WebApp.war', type: 'war']], credentialsId: 'nexus', groupId: 'lu.amazon.aws.demo', nexusUrl: '3.237.224.246:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-snapshots', version: '2.0-SNAPSHOT' 
       }
     }
     stage('Deploy to tomcat') {
@@ -45,7 +45,7 @@ pipeline {
     stage('DAST') {
       steps {
         sshagent(['zap']) {
-            sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.89.125 "docker run -t owasp/zap2docker-stable zap-baseline.py -t http://54.91.210.26:8080/WebApp/" || true'
+            sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.89.125 "docker run -t owasp/zap2docker-stable zap-baseline.py -t http://54.159.169.223:8080/WebApp/" || true'
         } 
       }
     }
