@@ -32,9 +32,12 @@ pipeline {
         sh 'mvn clean package'
       }
     }
-    stage('Nexus storage') {
+    stage('building the docker image') {
       steps {
-        nexusArtifactUploader artifacts: [[artifactId: 'WebApp', classifier: 'debug', file: '/var/lib/jenkins/workspace/webapp-ci-cd-pipeline/target/WebApp.war', type: 'war']], credentialsId: 'nexus', groupId: 'lu.amazon.aws.demo', nexusUrl: '3.237.224.246:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-snapshots', version: '2.3-SNAPSHOT' 
+        sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 034989618038.dkr.ecr.us-east-1.amazonaws.com'
+        sh 'docker build -t my-dockerhub-repo .'
+        sh 'docker tag my-dockerhub-repo:latest 034989618038.dkr.ecr.us-east-1.amazonaws.com/my-dockerhub-repo:latest'
+        sh 'docker push 034989618038.dkr.ecr.us-east-1.amazonaws.com/my-dockerhub-repo:latest'
       }
     }
     stage('Deploy to tomcat') {
