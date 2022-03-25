@@ -32,6 +32,11 @@ pipeline {
         sh 'mvn clean package'
       }
     }
+    stage('Nexus storage') {
+      steps {
+        nexusArtifactUploader artifacts: [[artifactId: 'WebApp', classifier: 'debug', file: '/var/lib/jenkins/workspace/webapp-ci-cd-pipeline/target/WebApp.war', type: 'war']], credentialsId: 'nexus', groupId: 'lu.amazon.aws.demo', nexusUrl: '35.172.235.158:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-snapshots', version: '3.0-SNAPSHOT' 
+      }
+    }
     stage('Deploy to tomcat') {
       steps {
           ansiblePlaybook credentialsId: 'ansible_id', disableHostKeyChecking: true, installation: 'ansible', inventory: '/home/ubuntu/webapp/ansible/ansi.dev', playbook: '/home/ubuntu/webapp/ansible/deploy.yml'
